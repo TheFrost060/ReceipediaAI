@@ -15,7 +15,7 @@ def main():
     st.markdown("# *Recipedia :cooking:*")
 
     st.markdown(
-        "An ML-powered app by Group-29 <a href='https://github.com/aleyaasinha' > <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/600px-Octicons-mark-github.svg.png' width='20' height='20' > </a> ",
+        "An ML-powered app by Group-29 <a href='https://github.com' > <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/600px-Octicons-mark-github.svg.png' width='20' height='20' > </a> ",
         unsafe_allow_html=True,
     )
     st.markdown(
@@ -25,6 +25,11 @@ def main():
         "For example, what recipes can you make with the food in your apartment? The ML based model will look through over 4500 recipes to find matches for you... :mag: Try it out for yourself below! :arrow_down:"
     )
 
+    # Set the cursor style to "pointer"
+    st.markdown(
+        "<style>.selectbox:hover{cursor: pointer;}</style>",
+        unsafe_allow_html=True,
+    )
     st.text("")
 
     # Session state dictionary
@@ -62,9 +67,10 @@ def main():
 
     if session_state.model_computed:
         recipe_all_box = st.selectbox(
-            "Either see the top 5 recommendations or pick a particular recipe you fancy",
+            "Either see the top 5 recommendations or pick a particular recipe",
             ["Show me them all!", "Select a single recipe"],
         )
+        
         if recipe_all_box == "Show me them all!":
             st.write(session_state.recipe_display, unsafe_allow_html=True)
         else:
@@ -97,7 +103,6 @@ def main():
 
             score_percentage = float(selection_details.score.values[0])
             st.markdown(f"**How much the recipe meets your ingredients:** {score_percentage:.2f}%")
-
 
 if __name__ == "__main__":
     main()
